@@ -1,6 +1,7 @@
 package com.example.myweatherapp.currentScr.views
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,13 +27,19 @@ fun TempRange(tempMin: Int,
               modifier: Modifier = Modifier) {
     Row(modifier = modifier.fillMaxWidth()
         .height(intrinsicSize = IntrinsicSize.Min),
-        horizontalArrangement = Arrangement.SpaceEvenly) {
-        TempRangeItem(tempLabel = "min",
-                      temp = tempMin)
+        horizontalArrangement = Arrangement.Center) {
+        Box(modifier = Modifier.weight(weight = 1f),
+            contentAlignment = Alignment.Center) {
+            TempRangeItem(tempLabel = "min",
+                          temp = tempMin)
+        }
         VerticalDivider(color = MaterialTheme.colorScheme.outlineVariant,
                         modifier = Modifier.padding(vertical = 5.dp))
-        TempRangeItem(tempLabel = "max",
-                      temp = tempMax)
+        Box(modifier = Modifier.weight(weight = 1f),
+            contentAlignment = Alignment.Center) {
+            TempRangeItem(tempLabel = "max",
+                          temp = tempMax)
+        }
     }
 }
 
