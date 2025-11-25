@@ -26,9 +26,11 @@ fun DayForecast(weekDay: String,
                 @DrawableRes weatherIcon: Int,
                 minTemp: Int,
                 maxTemp: Int,
-                proportion: Pair<Float, Float>) {
+                proportion: Pair<Float, Float>,
+                modifier: Modifier = Modifier) {
     Surface(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
-            shape = MaterialTheme.shapes.large) {
+            shape = MaterialTheme.shapes.large,
+            modifier = modifier) {
         Row(modifier = Modifier.fillMaxWidth()
             .padding(all = 20.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
