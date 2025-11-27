@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
 
 @Composable
-fun TempRange(tempMin: Int,
-              tempMax: Int,
+fun TempRange(tempMin: Int?,
+              tempMax: Int?,
               modifier: Modifier = Modifier) {
     Row(modifier = modifier.fillMaxWidth()
         .height(intrinsicSize = IntrinsicSize.Min),
