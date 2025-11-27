@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -21,12 +23,12 @@ import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
 import com.example.myweatherapp.R
 
 @Composable
-fun DayForecast(weekDay: String,
-                monthNum: Int,
-                @DrawableRes weatherIcon: Int,
-                minTemp: Int,
-                maxTemp: Int,
-                proportion: Pair<Float, Float>,
+fun DayForecast(weekDay: String?,
+                monthNum: Int?,
+                @DrawableRes weatherIcon: Int?,
+                minTemp: Int?,
+                maxTemp: Int?,
+                proportion: Pair<Float, Float>?,
                 modifier: Modifier = Modifier) {
     Surface(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
             shape = MaterialTheme.shapes.large,
@@ -37,11 +39,21 @@ fun DayForecast(weekDay: String,
             verticalAlignment = Alignment.CenterVertically) {
             DateColumn(weekDay = weekDay,
                        monthNum = monthNum)
-            Image(painter = painterResource(id = weatherIcon),
-                  contentDescription = null)
+            if (weatherIcon != null) {
+                Image(painter = painterResource(id = weatherIcon),
+                      contentDescription = null)
+            } else {
+                Placeholder(modifier = Modifier.height(height = 48.dp)
+                            .width(width = 57.dp))
+            }
             CurrentTempBar(proportion = proportion)
-            Text(text = "$minTemp-$maxTemp°",
-                 style = MaterialTheme.typography.headlineMedium)
+            if (minTemp == null || maxTemp == null) {
+                Placeholder(modifier = Modifier.height(height = 36.dp)
+                            .width(width = 80.dp))
+            } else {
+                Text(text = "$minTemp-$maxTemp°",
+                     style = MaterialTheme.typography.headlineMedium)
+            }
         }
     }
 }
@@ -50,6 +62,6 @@ fun DayForecast(weekDay: String,
 @Composable
 fun DayForecastPreview() {
     MyWeatherAppTheme {
-        DayForecast("Tue", 12, R.drawable.cloudy, 13, 10, proportion = 4f to 6f)
+        DayForecast(null, null, null, null, 10, proportion = null)
     }
 }
