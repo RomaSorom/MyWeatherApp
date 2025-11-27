@@ -23,8 +23,8 @@ import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
 @Composable
 fun Placeholder(modifier: Modifier = Modifier) {
     val infiniteTransition = rememberInfiniteTransition()
-    val color by infiniteTransition.animateColor(initialValue = MaterialTheme.colorScheme.onPrimary,
-                                                 targetValue = MaterialTheme.colorScheme.onSecondary,
+    val color by infiniteTransition.animateColor(initialValue = MaterialTheme.colorScheme.primary,
+                                                 targetValue = MaterialTheme.colorScheme.secondary,
                                                  animationSpec = infiniteRepeatable(animation = tween(durationMillis = 1000),
                                                                                     repeatMode = RepeatMode.Reverse)
     )
