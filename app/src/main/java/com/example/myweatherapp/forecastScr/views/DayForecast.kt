@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
 import com.example.myweatherapp.R
+import com.example.myweatherapp.sharedViews.Placeholder
 
 @Composable
 fun DayForecast(weekDay: String?,
