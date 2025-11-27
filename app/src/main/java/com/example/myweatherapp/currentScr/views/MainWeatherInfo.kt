@@ -6,6 +6,7 @@ import com.example.myweatherapp.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,23 +15,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.myweatherapp.forecastScr.views.Placeholder
 import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
 
 @Composable
-fun MainWeatherInfo(@DrawableRes weatherTypeIcon: Int,
-                    temp: Int,
-                    weatherTypeName: String,
+fun MainWeatherInfo(@DrawableRes weatherTypeIcon: Int?,
+                    temp: Int?,
+                    weatherTypeName: String?,
                     modifier: Modifier = Modifier) {
     Column(modifier = modifier,
            horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(painter = painterResource(id = weatherTypeIcon),
-              contentDescription = null)
+        if (weatherTypeIcon == null) {
+            Placeholder(modifier = Modifier.width(width = 57.dp)
+                        .height(height = 48.dp))
+        } else {
+            Image(painter = painterResource(id = weatherTypeIcon),
+                  contentDescription = null)
+        }
         Spacer(modifier = Modifier.height(height = 20.dp))
-        Text(text = "$temp°",
-             style = MaterialTheme.typography.displayLarge)
+        if (temp == null) {
+            Placeholder(modifier = Modifier.width(width = 85.dp)
+                        .height(height = 67.dp))
+        } else {
+            Text(text = "$temp°",
+                 style = MaterialTheme.typography.displayLarge)
+        }
         Spacer(modifier = Modifier.height(height = 10.dp))
-        Text(text = weatherTypeName,
-             style = MaterialTheme.typography.titleLarge)
+        if (weatherTypeName == null) {
+            Placeholder(modifier = Modifier.width(width = 66.dp)
+                        .height(height = 28.dp))
+        } else {
+            Text(text = weatherTypeName,
+                 style = MaterialTheme.typography.titleLarge)
+        }
     }
 }
 
@@ -38,8 +55,8 @@ fun MainWeatherInfo(@DrawableRes weatherTypeIcon: Int,
 @Composable
 fun MainWeatherInfoPreview() {
     MyWeatherAppTheme {
-        MainWeatherInfo(weatherTypeIcon = R.drawable.cloudy,
-                        temp = 12,
-                        weatherTypeName = "Cloudy")
+        MainWeatherInfo(weatherTypeIcon = null,
+                        temp = null,
+                        weatherTypeName = null)
     }
 }
