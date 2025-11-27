@@ -1,4 +1,4 @@
-package com.example.myweatherapp.forecastScr.views
+package com.example.myweatherapp.sharedViews
 
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.RepeatMode
@@ -25,11 +25,11 @@ fun Placeholder(modifier: Modifier = Modifier) {
     val infiniteTransition = rememberInfiniteTransition()
     val color by infiniteTransition.animateColor(initialValue = MaterialTheme.colorScheme.primary,
                                                  targetValue = MaterialTheme.colorScheme.secondary,
-                                                 animationSpec = infiniteRepeatable(animation = tween(durationMillis = 1000),
+                                                 animationSpec = infiniteRepeatable(animation = tween(durationMillis = 2000),
                                                                                     repeatMode = RepeatMode.Reverse)
     )
     Box(modifier = modifier
-        .clip(shape = RoundedCornerShape(size = 2.dp))
+        .clip(shape = RoundedCornerShape(size = 10.dp))
         .background(color = color))
 }
 
