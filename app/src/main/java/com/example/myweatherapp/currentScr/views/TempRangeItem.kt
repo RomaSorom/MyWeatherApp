@@ -9,10 +9,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.myweatherapp.sharedViews.AnimColors
 import com.example.myweatherapp.sharedViews.Placeholder
 import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
+import kotlin.Pair
 
 @Composable
 fun TempRangeItem(tempLabel: String,
@@ -25,7 +28,9 @@ fun TempRangeItem(tempLabel: String,
                 style = MaterialTheme.typography.headlineLarge)
         } else {
             Placeholder(modifier = Modifier.width(width = 47.dp)
-                        .height(height = 40.dp))
+                        .height(height = 40.dp),
+                        animColors = Pair(first = Color(color = AnimColors.INITIAL),
+                                          second = Color(color = AnimColors.TARGET)))
         }
     }
 }

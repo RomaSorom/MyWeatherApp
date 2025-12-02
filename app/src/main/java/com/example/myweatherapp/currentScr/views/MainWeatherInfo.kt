@@ -13,9 +13,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.myweatherapp.sharedViews.AnimColors
 import com.example.myweatherapp.sharedViews.Placeholder
 import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
 
@@ -28,7 +30,9 @@ fun MainWeatherInfo(@DrawableRes weatherTypeIcon: Int?,
            horizontalAlignment = Alignment.CenterHorizontally) {
         if (weatherTypeIcon == null) {
             Placeholder(modifier = Modifier.width(width = 150.dp)
-                        .height(height = 125.dp))
+                        .height(height = 125.dp),
+                        animColors = Pair(first = Color(color = AnimColors.INITIAL),
+                                          second = Color(color = AnimColors.TARGET)))
         } else {
             Image(painter = painterResource(id = weatherTypeIcon),
                   contentDescription = null,
@@ -38,7 +42,9 @@ fun MainWeatherInfo(@DrawableRes weatherTypeIcon: Int?,
         Spacer(modifier = Modifier.height(height = 20.dp))
         if (temp == null) {
             Placeholder(modifier = Modifier.width(width = 85.dp)
-                        .height(height = 67.dp))
+                        .height(height = 67.dp),
+                        animColors = Pair(first = Color(color = AnimColors.INITIAL),
+                                          second = Color(color = AnimColors.TARGET)))
         } else {
             Text(text = "$temp°",
                  style = MaterialTheme.typography.displayLarge)
@@ -46,7 +52,9 @@ fun MainWeatherInfo(@DrawableRes weatherTypeIcon: Int?,
         Spacer(modifier = Modifier.height(height = 10.dp))
         if (weatherTypeName == null) {
             Placeholder(modifier = Modifier.width(width = 66.dp)
-                        .height(height = 28.dp))
+                        .height(height = 28.dp),
+                        animColors = Pair(first = Color(color = AnimColors.INITIAL),
+                                          second = Color(color = AnimColors.TARGET)))
         } else {
             Text(text = weatherTypeName,
                  style = MaterialTheme.typography.titleLarge)

@@ -21,10 +21,12 @@ import androidx.compose.ui.unit.dp
 import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
 
 @Composable
-fun Placeholder(modifier: Modifier = Modifier) {
+fun Placeholder(modifier: Modifier = Modifier,
+                animColors: Pair<Color, Color> = Pair(first = MaterialTheme.colorScheme.primary,
+                                                      second = MaterialTheme.colorScheme.secondary)) {
     val infiniteTransition = rememberInfiniteTransition()
-    val color by infiniteTransition.animateColor(initialValue = MaterialTheme.colorScheme.primary,
-                                                 targetValue = MaterialTheme.colorScheme.secondary,
+    val color by infiniteTransition.animateColor(initialValue = animColors.first,
+                                                 targetValue = animColors.second,
                                                  animationSpec = infiniteRepeatable(animation = tween(durationMillis = 2000),
                                                                                     repeatMode = RepeatMode.Reverse)
     )
