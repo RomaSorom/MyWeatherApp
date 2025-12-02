@@ -11,9 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.myweatherapp.sharedViews.AnimColors
 import com.example.myweatherapp.sharedViews.Placeholder
 import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
 
@@ -33,7 +35,9 @@ fun WeatherParameter(parameterName: String,
                 fontWeight = FontWeight.W500)
         } else {
             Placeholder(modifier = Modifier.width(width = 35.dp)
-                        .height(height = 18.dp))
+                        .height(height = 18.dp),
+                        animColors = Pair(first = Color(color = AnimColors.INITIAL),
+                                                        second = Color(color = AnimColors.TARGET)))
         }
     }
 }
