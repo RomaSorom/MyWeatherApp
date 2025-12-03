@@ -18,11 +18,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
 
 @Composable
-fun ForecastButton(modifier: Modifier = Modifier) {
-    Button(onClick = {  },
+fun ForecastButton(modifier: Modifier = Modifier,
+                   navController: NavHostController) {
+    Button(onClick = { navController.navigate(route = "forecast") },
            modifier = modifier.width(width = 220.dp)
                .height(height = 45.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically,
@@ -41,7 +44,8 @@ fun ForecastButton(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun ForecastButtonPreview() {
+    val navController = rememberNavController()
     MyWeatherAppTheme {
-        ForecastButton()
+        ForecastButton(navController = navController)
     }
 }
