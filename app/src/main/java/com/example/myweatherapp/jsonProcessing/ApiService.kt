@@ -12,10 +12,12 @@ interface ApiService {
     @GET(value = "weather")
     suspend fun getCurrentWeather(@Query(value = "lat") lat: Float,
                                   @Query(value = "lon") lon: Float,
+                                  @Query(value = "units") units: String = "metric",
                                   @Query(value = "appid") appid: String = key): Response<CurrentWeather>
 
     @GET(value = "forecast/daily")
     suspend fun getForecast(@Query(value = "lat") lat: Float,
                             @Query(value = "lon") lon: Float,
+                            @Query(value = "units") units: String = "metric",
                             @Query(value = "appid") appid: String = key): Response<Forecast>
 }
