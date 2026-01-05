@@ -48,7 +48,9 @@ fun TempRange(tempMin: Int?,
 fun TempRangePreview() {
     MyWeatherAppTheme {
         Surface {
-            TempRange(12, 19, Modifier.padding(20.dp))
+            TempRange(tempMin = null,
+                      tempMax = 19,
+                      modifier = Modifier.padding(20.dp),)
         }
     }
 }
