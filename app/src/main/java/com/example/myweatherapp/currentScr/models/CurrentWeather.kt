@@ -8,8 +8,12 @@ data class CurrentWeather(
     @SerializedName(value = "main")
     val parameters: Parameters,
     val wind: Wind,
-    val rain: Rain?,
+    @SerializedName(value = "rain")
+    private val _rain: Rain?,
     val clouds: Clouds,
     @SerializedName(value = "sys")
     val sun: Sun
-)
+) {
+    val rain: Rain
+        get() = _rain ?: Rain(h1 = 0f)
+}

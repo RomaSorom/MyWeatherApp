@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.myweatherapp.currentScr.views.CurrentWeatherScr
+import com.example.myweatherapp.forecastScr.views.ForecastScr
 import com.example.myweatherapp.ui.theme.MyWeatherAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,12 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyWeatherAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MyNavigation()
             }
         }
     }

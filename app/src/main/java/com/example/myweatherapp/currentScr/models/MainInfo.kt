@@ -1,8 +1,9 @@
 package com.example.myweatherapp.currentScr.models
 
+import com.example.myweatherapp.WeatherType
 import com.google.gson.annotations.SerializedName
 
 data class MainInfo(
     val description: String,
-    val icon: String
+    val icon: WeatherType
 )
