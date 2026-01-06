@@ -3,6 +3,7 @@ package com.example.myweatherapp.forecastScr.views
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,25 +37,40 @@ fun DayForecast(weekDay: String?,
             modifier = modifier) {
         Row(modifier = Modifier.fillMaxWidth()
             .padding(all = 20.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically) {
-            DateColumn(weekDay = weekDay,
-                       monthNum = monthNum)
-            if (weatherIcon != null) {
-                Image(painter = painterResource(id = weatherIcon),
-                      contentDescription = null)
-            } else {
-                Placeholder(modifier = Modifier.height(height = 48.dp)
-                            .width(width = 57.dp))
+            Box(modifier = Modifier.weight(weight = 1f),
+                contentAlignment = Alignment.Center) {
+                DateColumn(weekDay = weekDay,
+                    monthNum = monthNum)
             }
-            CurrentTempBar(proportion = proportion)
-            if (minTemp == null || maxTemp == null) {
-                Placeholder(modifier = Modifier.height(height = 36.dp)
-                            .width(width = 80.dp))
-            } else {
-                Text(text = "$minTemp-$maxTemp°",
-                     style = MaterialTheme.typography.headlineMedium)
+            Box(modifier = Modifier.weight(weight = 1f),
+                contentAlignment = Alignment.Center) {
+                if (weatherIcon != null) {
+                    Image(painter = painterResource(id = weatherIcon),
+                        contentDescription = null)
+                } else {
+                    Placeholder(modifier = Modifier.height(height = 48.dp)
+                        .width(width = 57.dp))
+                }
             }
+
+            Box(modifier = Modifier.weight(weight = 1f),
+                contentAlignment = Alignment.Center) {
+                CurrentTempBar(proportion = proportion)
+            }
+
+            Box(modifier = Modifier.weight(weight = 1f),
+                contentAlignment = Alignment.Center) {
+                if (minTemp == null || maxTemp == null) {
+                    Placeholder(modifier = Modifier.height(height = 36.dp)
+                        .width(width = 80.dp))
+                } else {
+                    Text(text = "$minTemp-$maxTemp°",
+                        style = MaterialTheme.typography.headlineMedium)
+                }
+            }
+
         }
     }
 }
