@@ -38,6 +38,7 @@ class CurrentVM : ViewModel() {
                 if (response.isSuccessful && response.body() != null) {
                     println("Current weather: ${response.body()}")
                     _currentWeather.value = response.body()
+                    _isError.value = false
                 }
             } catch (e: Exception) {
                 _isError.value = true
