@@ -24,6 +24,9 @@ class CurrentVM : ViewModel() {
     private val _currentWeather: MutableStateFlow<CurrentWeather?> = MutableStateFlow(value = null)
     val currentWeather: StateFlow<CurrentWeather?> = _currentWeather
 
+    private val _isError: MutableStateFlow<Boolean> = MutableStateFlow(value = false)
+    val isError: StateFlow<Boolean> = _isError
+
     init {
         getCurrentWeather()
     }

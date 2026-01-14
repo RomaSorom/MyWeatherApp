@@ -45,6 +45,8 @@ fun CurrentWeatherScr(navController: NavHostController,
                                         Color(color = 0xFFFFFFFF))
     val currentWeather: State<CurrentWeather?> = currentVM.currentWeather.collectAsState()
 
+    val isError: State<Boolean> = currentVM.isError.collectAsState()
+
     Box(modifier = Modifier.fillMaxSize()
         .background(brush = Brush.verticalGradient(colors = backColors))) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
