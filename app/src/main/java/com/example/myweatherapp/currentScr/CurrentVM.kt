@@ -40,7 +40,7 @@ class CurrentVM : ViewModel() {
                     _currentWeather.value = response.body()
                 }
             } catch (e: Exception) {
-                println("Json processing error: ${e.message}")
+                _isError.value = true
             }
 
         }
