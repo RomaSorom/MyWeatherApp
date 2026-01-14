@@ -34,6 +34,7 @@ import com.example.myweatherapp.R
 import com.example.myweatherapp.currentScr.CurrentVM
 //import com.example.myweatherapp.currentScr.MainWeatherData
 import com.example.myweatherapp.currentScr.models.CurrentWeather
+import com.example.myweatherapp.sharedViews.Error
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
@@ -47,96 +48,106 @@ fun CurrentWeatherScr(navController: NavHostController,
 
     val isError: State<Boolean> = currentVM.isError.collectAsState()
 
-    Box(modifier = Modifier.fillMaxSize()
-        .background(brush = Brush.verticalGradient(colors = backColors))) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            MainWeatherInfo(weatherTypeIcon = currentWeather
-                                              .value
-                                              ?.mainInfoList?.first()
-                                              ?.icon
-                                              ?.iconId,
-                            temp = currentWeather
-                                .value
-                                ?.parameters
-                                ?.temp
-                                ?.toInt(),
-                            weatherTypeName = currentWeather
-                                              .value
-                                              ?.mainInfoList?.first()
-                                              ?.description,
-                            modifier = Modifier.padding(top = 108.dp))
-            Spacer(modifier = Modifier.height(height = 20.dp))
-            Surface(shape = MaterialTheme.shapes.large,
+    if (isError.value) {
+        Box(modifier = Modifier.fillMaxSize()
+            .background(brush = Brush.verticalGradient(colors = backColors)),
+            contentAlignment = Alignment.Center) {
+            Error() { currentVM.getCurrentWeather() }
+        }
+    } else {
+        Box(modifier = Modifier.fillMaxSize()
+            .background(brush = Brush.verticalGradient(colors = backColors))) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                MainWeatherInfo(weatherTypeIcon = currentWeather
+                    .value
+                    ?.mainInfoList?.first()
+                    ?.icon
+                    ?.iconId,
+                    temp = currentWeather
+                        .value
+                        ?.parameters
+                        ?.temp
+                        ?.toInt(),
+                    weatherTypeName = currentWeather
+                        .value
+                        ?.mainInfoList?.first()
+                        ?.description,
+                    modifier = Modifier.padding(top = 108.dp))
+                Spacer(modifier = Modifier.height(height = 20.dp))
+                Surface(shape = MaterialTheme.shapes.large,
                     modifier = Modifier.fillMaxWidth()
                         .padding(horizontal = 18.dp)
                         .height(height = 480.dp)) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    TempRange(tempMin = currentWeather
-                                        .value
-                                        ?.parameters
-                                        ?.tempMin
-                                        ?.toInt(),
-                              tempMax = currentWeather
-                                        .value
-                                        ?.parameters
-                                        ?.tempMax
-                                        ?.toInt(),
-                              modifier = Modifier.padding(horizontal = 30.dp)
-                                  .padding(top = 25.dp))
-                    HorizontalDivider(modifier = Modifier.padding(horizontal = 30.dp)
-                                      .padding(top = 4.dp))
-                    Spacer(modifier = Modifier.height(height = 25.dp))
-                    InfoRow(column1 = { WeatherParameter(parameterName = "Pressure",
-                                                         parameterValue = currentWeather
-                                                                          .value
-                                                                          ?.parameters
-                                                                          ?.pressure
-                                                                          ?.toString(),
-                                                         parameterUnit = "hPa") },
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        TempRange(tempMin = currentWeather
+                            .value
+                            ?.parameters
+                            ?.tempMin
+                            ?.toInt(),
+                            tempMax = currentWeather
+                                .value
+                                ?.parameters
+                                ?.tempMax
+                                ?.toInt(),
+                            modifier = Modifier.padding(horizontal = 30.dp)
+                                .padding(top = 25.dp))
+                        HorizontalDivider(modifier = Modifier.padding(horizontal = 30.dp)
+                            .padding(top = 4.dp))
+                        Spacer(modifier = Modifier.height(height = 25.dp))
+                        InfoRow(column1 = { WeatherParameter(parameterName = "Pressure",
+                            parameterValue = currentWeather
+                                .value
+                                ?.parameters
+                                ?.pressure
+                                ?.toString(),
+                            parameterUnit = "hPa") },
                             column2 = { WeatherParameter(parameterName = "Humidity",
-                                                         parameterValue = currentWeather
-                                                                          .value
-                                                                          ?.parameters
-                                                                          ?.humidity
-                                                                          ?.toString(),
-                                                         parameterUnit = "%") },
+                                parameterValue = currentWeather
+                                    .value
+                                    ?.parameters
+                                    ?.humidity
+                                    ?.toString(),
+                                parameterUnit = "%") },
                             backColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
                             modifier = Modifier.padding(horizontal = 30.dp))
-                    Spacer(modifier = Modifier.height(height = 20.dp))
-                    InfoRow(column1 = { WeatherParameter(parameterName = "Wind",
-                                                         parameterValue = currentWeather
-                                                             .value
-                                                             ?.wind
-                                                             ?.speed
-                                                             ?.toString(),
-                                                         parameterUnit = "m/s") },
+                        Spacer(modifier = Modifier.height(height = 20.dp))
+                        InfoRow(column1 = { WeatherParameter(parameterName = "Wind",
+                            parameterValue = currentWeather
+                                .value
+                                ?.wind
+                                ?.speed
+                                ?.toString(),
+                            parameterUnit = "m/s") },
                             column2 = { WeatherParameter(parameterName = "Rain (1h)",
-                                                         parameterValue = currentWeather
-                                                                          .value
-                                                                          ?.rain
-                                                                          ?.h1
-                                                                          ?.toString(),
-                                                         parameterUnit = "mm") },
+                                parameterValue = currentWeather
+                                    .value
+                                    ?.rain
+                                    ?.h1
+                                    ?.toString(),
+                                parameterUnit = "mm") },
                             backColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
                             modifier = Modifier.padding(horizontal = 30.dp))
-                    Spacer(modifier = Modifier.height(height = 20.dp))
-                    InfoRow(column1 = { WeatherParameter(parameterName = "Clouds",
-                                                         parameterValue = currentWeather
-                                                                          .value
-                                                                          ?.clouds
-                                                                          ?.all
-                                                                          ?.toString(),
-                                                         parameterUnit = "%") },
+                        Spacer(modifier = Modifier.height(height = 20.dp))
+                        InfoRow(column1 = { WeatherParameter(parameterName = "Clouds",
+                            parameterValue = currentWeather
+                                .value
+                                ?.clouds
+                                ?.all
+                                ?.toString(),
+                            parameterUnit = "%") },
                             column2 = { WeatherParameter(parameterName = "Sunrise/Sunset",
-                                                         parameterValue = currentVM.getSunParameter()) },
+                                parameterValue = currentVM.getSunParameter()) },
                             backColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
                             modifier = Modifier.padding(horizontal = 30.dp))
-                    Spacer(modifier = Modifier.height(height = 30.dp))
-                    ForecastButton(navController = navController)
+                        Spacer(modifier = Modifier.height(height = 30.dp))
+                        ForecastButton(navController = navController)
+                    }
                 }
             }
         }
     }
+
+
 }
 
 @Preview()
