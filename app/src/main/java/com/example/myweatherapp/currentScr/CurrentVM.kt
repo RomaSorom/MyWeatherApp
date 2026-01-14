@@ -24,6 +24,9 @@ class CurrentVM : ViewModel() {
     private val _currentWeather: MutableStateFlow<CurrentWeather?> = MutableStateFlow(value = null)
     val currentWeather: StateFlow<CurrentWeather?> = _currentWeather
 
+    private val _isError: MutableStateFlow<Boolean> = MutableStateFlow(value = false)
+    val isError: StateFlow<Boolean> = _isError
+
     init {
         getCurrentWeather()
     }
@@ -35,9 +38,10 @@ class CurrentVM : ViewModel() {
                 if (response.isSuccessful && response.body() != null) {
                     println("Current weather: ${response.body()}")
                     _currentWeather.value = response.body()
+                    _isError.value = false
                 }
             } catch (e: Exception) {
-                println("Json processing error: ${e.message}")
+                _isError.value = true
             }
 
         }
